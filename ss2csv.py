@@ -22,28 +22,30 @@ except ImportError, xlrd_error:
 
 def find_excel_files_by_mimetype():
     """
-   Return a list of Excel files by matching MIMETYPE.
-   :return: list
-   """
+    Return a list of Excel files by matching MIMETYPE.
+    @return: list of found files
+    """
     return [f for f in glob.glob("*.*")
-        if mimetypes.guess_type(f)[0] == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']
+            if mimetypes.guess_type(f)[0] ==
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            ]
 
 
 def find_excel_files_by_extension(extension, directory):
     """
-   Return a list of Excel files by extension.
-   :param extension: str
-   :param directory: str
-   :return: list
-   """
+    Return a list of Excel files by extension.
+    @param extension: str
+    @param directory: str
+    @return: list of found files
+    """
     os.chdir(directory)
     return [f for f in glob.glob("*.{0}".format(extension))]
 
 
 class WorkbookData(object):
     """
-   Primary class to handle the provided workbook.
-   """
+    Primary class to handle the provided workbook.
+    """
     def __init__(self, spreadsheet):
         self._ss = xlrd.open_workbook(spreadsheet)
         self.sheets = self._ss.sheets()
@@ -60,18 +62,17 @@ class WorkbookData(object):
 
 class SaveToCSV(threading.Thread):
     """
-   Save each sheet in the workbook to it's own CSV file.  Each
-   worksheet is saved to CSV by it's own thread.
-   """
+    Save each sheet in the workbook to it's own CSV file.  Each
+    worksheet is saved to CSV by it's own thread.
+    """
     def __init__(self, workbook):
         threading.Thread.__init__(self)
         self.workbook = workbook
 
     def run(self):
         """
-       Main worker.
-       :return: None
-       """
+        Main worker.
+        """
         for sheet in self.workbook.sheets:
             with open("{0}.csv".format(sheet.name), 'wb') as csv_file:
                 cw = csv.writer(csv_file, quoting=csv.QUOTE_ALL)

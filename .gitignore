@@ -30,3 +30,5 @@ coverage.xml
 docs/_build/
 .idea
 *.iml
+*.xls
+*.xlsx
