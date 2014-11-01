@@ -80,7 +80,7 @@ class SaveToCSV(threading.Thread):
                  for row_num in xrange(len(self.workbook.worksheet_stats))]
 
 if __name__ == '__main__':
-    wb = WorkbookData('test_file_1.xlsx')
+    wb = WorkbookData('test_ss.xlsx')
     threads = []
     for num in xrange(wb.worksheet_count):
         thread = SaveToCSV(wb)
@@ -100,6 +100,6 @@ if __name__ == '__main__':
         for sheet_data in wb.worksheet_stats:
             print "          Sheet     : {0}".format(sheet_data['name'])
             print """          Rows      : {0}
-         Columns   : {2}\n""".format(wb.worksheet_count,
-                                     sheet_data['rows'],
-                                     sheet_data['columns'])
+          Columns   : {2}\n""".format(wb.worksheet_count,
+                                      sheet_data['rows'],
+                                      sheet_data['columns'])
