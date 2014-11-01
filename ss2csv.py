@@ -3,18 +3,14 @@
 
 #
 # Base functionality to convert XLS(x) files to CSV.
-# Options to consider:
-#   1. -f <filename>
-#   2. -d <directory with files>
-#       A. Implement a file search for
 #
 
-import sys
+import os
 import csv
+import sys
+import glob
 import threading
 import mimetypes
-import glob
-import os
 
 # If xlrd isn't installed, stop.
 try:
@@ -96,13 +92,13 @@ if __name__ == '__main__':
         print """Converted workbooks : {0}
              Rows      : {1}
              Colums    : {2}""".format(wb.worksheet_count,
-                                        wb.worksheet_stats['rows'],
-                                        wb.worksheet_stats['columns'])
+                                       wb.worksheet_stats['rows'],
+                                       wb.worksheet_stats['columns'])
     else:
         print "Converted workbooks : {0}".format(wb.worksheet_count)
         for sheet_data in wb.worksheet_stats:
             print "          Sheet     : {0}".format(sheet_data['name'])
             print """          Rows      : {0}
          Columns   : {2}\n""".format(wb.worksheet_count,
-                                      sheet_data['rows'],
-                                      sheet_data['columns'])
+                                     sheet_data['rows'],
+                                     sheet_data['columns'])
