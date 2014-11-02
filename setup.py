@@ -13,10 +13,11 @@ setup(
         '': ['*.txt'],
     },
     url='https://github.com/briandowns/ss2csv',
-    license='LICENSE',
+    license='Apache',
     description='Quickly save spreadsheet workbooks to csv files.',
     long_description=open('README.md').read(),
     install_requires=[
         'xlrd==0.9.3',
     ],
+    zip_safe=False,
 )
