@@ -7,7 +7,7 @@ setup(
     author_email='brian.downs@gmail.com',
     maintainer='Brian Downs',
     maintainer_email='brian.downs@gmail.com',
-    scripts=['ss2csv/ss2csv.py'],
+    scripts=['ss2csv.py'],
     packages=['ss2csv'],
     package_data={
         '': ['*.txt'],
