@@ -2,7 +2,8 @@
 # coding=utf-8
 
 #
-# Base functionality to convert XLS(x) files to CSV.
+# Convert spreadsheets to CSV.  Each sheet in the workbook will be
+# saved to its own csv file named with the sheet name.
 #
 
 import os
@@ -34,6 +35,11 @@ def find_excel_files_by_mimetype():
 
 
 def is_spreadsheet(file):
+    """
+    Make sure the file passed in is a spreadsheet.
+    @param file: str for file to test
+    @return: bool
+    """
     if 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' == \
             mimetypes.guess_type(file)[0]:
         return True
@@ -91,32 +97,33 @@ class SaveToCSV(threading.Thread):
                  for row_num in xrange(len(self.workbook.worksheet_stats))]
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Spreadsheet to CSV converter.')
+    parser = argparse.ArgumentParser(description='Save spreadsheet in CSV.')
     parser.add_argument('-c', '--convert',
                         required=True, help='Convert spreadsheet')
     args = vars(parser.parse_args())
 
     if args['convert']:
-        wb = WorkbookData(args['convert'])
-        threads = []
-        for num in xrange(wb.worksheet_count):
-            thread = SaveToCSV(wb)
-            thread.start()
-            threads.append(thread)
+        if is_spreadsheet(args['convert']):
+            wb = WorkbookData(args['convert'])
+            threads = []
+            for num in xrange(wb.worksheet_count):
+                thread = SaveToCSV(wb)
+                thread.start()
+                threads.append(thread)
 
-        [t.join() for t in threads]
+            [t.join() for t in threads]
 
-        if wb.worksheet_count == 1:
-            print """Converted workbooks : {0}
-                 Rows      : {1}
-                 Colums    : {2}""".format(wb.worksheet_count,
-                                           wb.worksheet_stats['rows'],
-                                           wb.worksheet_stats['columns'])
-        else:
-            print "Converted workbooks : {0}".format(wb.worksheet_count)
-            for sheet_data in wb.worksheet_stats:
-                print "          Sheet     : {0}".format(sheet_data['name'])
-                print """          Rows      : {0}
+            if wb.worksheet_count == 1:
+                print """Converted workbooks : {0}
+                     Rows      : {1}
+                     Colums    : {2}""".format(wb.worksheet_count,
+                                               wb.worksheet_stats['rows'],
+                                               wb.worksheet_stats['columns'])
+            else:
+                print "Converted workbooks : {0}".format(wb.worksheet_count)
+                for sheet_data in wb.worksheet_stats:
+                    print "          Sheet     : {0}".format(sheet_data['name'])
+                    print """          Rows      : {0}
           Columns   : {2}\n""".format(wb.worksheet_count,
                                       sheet_data['rows'],
                                       sheet_data['columns'])
