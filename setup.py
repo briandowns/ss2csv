@@ -7,7 +7,7 @@ setup(
     author_email='brian.downs@gmail.com',
     maintainer='Brian Downs',
     maintainer_email='brian.downs@gmail.com',
-    scripts=['ss2csv.py'],
+    scripts=['ss2csv/ss2csv.py'],
     packages=['ss2csv'],
     package_data={
         '': ['*.txt'],
@@ -16,8 +16,4 @@ setup(
     license='Apache',
     description='Quickly save spreadsheet workbooks to csv files.',
     long_description=open('README.md').read(),
-    install_requires=[
-        'xlrd==0.9.3',
-    ],
-    zip_safe=False,
 )
