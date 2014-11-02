@@ -6,7 +6,7 @@
 
 import sys
 import pytest
-from ss2csv import *
+from ss2csv.ss2csv import *
 
 try:
     import xlrd
