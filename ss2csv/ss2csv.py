@@ -23,11 +23,12 @@ except ImportError, xlrd_error:
 
 
 # Remnant from a previous iteration of the script.
-def find_excel_files_by_mimetype():
+def find_excel_files_by_mimetype(directory):
     """
     Return a list of Excel files by matching MIMETYPE.
     @return: list of found files
     """
+    os.chdir(directory)
     return [f for f in glob.glob("*.*")
             if mimetypes.guess_type(f)[0] ==
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
