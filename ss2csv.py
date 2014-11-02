@@ -29,10 +29,7 @@ def find_excel_files_by_mimetype(directory):
     @return: list of found files
     """
     os.chdir(directory)
-    return [f for f in glob.glob("*.*")
-            if mimetypes.guess_type(f)[0] ==
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-            ]
+    return [f for f in glob.glob("*.*") if is_spreadsheet(f)]
 
 
 def is_spreadsheet(file):
