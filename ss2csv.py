@@ -6,6 +6,10 @@
 # saved to its own csv file named with the sheet name.
 #
 
+#
+# TODO: Create better output for conversion stats.
+#
+
 import os
 import csv
 import sys
@@ -28,8 +32,7 @@ def find_excel_files_by_mimetype(directory):
     Return a list of Excel files by matching MIMETYPE.
     @return: list of found files
     """
-    os.chdir(directory)
-    return [f for f in glob.glob("*.*") if is_spreadsheet(f)]
+    return [f for f in glob.glob("{0}/*.*".format(os.chdir(directory))) if is_spreadsheet(f)]
 
 
 def is_spreadsheet(file):
@@ -52,8 +55,8 @@ def find_excel_files_by_extension(extension, directory):
     @param directory: str
     @return: list of found files
     """
-    os.chdir(directory)
-    return [f for f in glob.glob("*.{0}".format(extension))]
+    return [f for f in glob.glob("{0}/*.{1}".format(os.chdir(directory),
+                                                    extension))]
 
 
 class WorkbookData(object):
