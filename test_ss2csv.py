@@ -10,6 +10,7 @@ import pytest
 from ss2csv import *
 
 test_file = 'test_ss.xlsx'
+excel_extensions = ['xlsx', 'xls']
 
 
 def test_xlrd_installation():
@@ -21,6 +22,21 @@ def test_xlrd_installation():
         assert True
     except ImportError:
         sys.exit(1)
+
+
+def test_find_excel_files_by_extension():
+    """
+    Test if files can be found by extension
+    """
+    for extension in excel_extensions:
+        assert find_excel_files_by_extension(extension, '.')
+
+
+def test_find_excel_files_by_mimetype():
+    """
+    Test if files can be found by their mimetype
+    """
+    assert find_excel_files_by_mimetype('.')
 
 
 def test_is_spreadsheet():

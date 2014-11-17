@@ -30,7 +30,8 @@ def find_excel_files_by_mimetype(directory):
     Return a list of Excel files by matching MIMETYPE.
     @return: list of found files
     """
-    return [f for f in glob.glob("{0}/*.*".format(os.chdir(directory))) if is_spreadsheet(f)]
+    os.chdir(directory)
+    return [f for f in glob.glob("*.*") if is_spreadsheet(f)]
 
 
 def is_spreadsheet(file):
@@ -53,8 +54,8 @@ def find_excel_files_by_extension(extension, directory):
     @param directory: str
     @return: list of found files
     """
-    return [f for f in glob.glob("{0}/*.{1}".format(os.chdir(directory),
-                                                    extension))]
+    os.chdir(directory)
+    return [f for f in glob.glob("*.{0}".format(extension))]
 
 
 class WorkbookData(object):
