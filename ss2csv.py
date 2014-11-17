@@ -5,8 +5,6 @@
 # Convert spreadsheets to CSV.  Each sheet in the workbook will be
 # saved to its own csv file named with the sheet name.
 #
-
-#
 # TODO: Create better output for conversion stats.
 #
 
