@@ -4,17 +4,20 @@
 # Tests
 #
 
+import imp
 import sys
 import pytest
 from ss2csv import *
 
-try:
-    import xlrd
-except ImportError, xlrd_error:
-    print xlrd_error.message
-    sys.exit(1)
-
 test_file = 'test_ss.xlsx'
+
+
+def test_xlrd_installation():
+    try:
+        imp.find_module('xlrd')
+        assert True
+    except ImportError:
+        sys.exit(1)
 
 
 def test_is_spreadsheet():
