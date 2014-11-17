@@ -4,7 +4,7 @@ Simple and fast converter of spreadsheet workbooks to csv file(s).  If there's m
 
 ## Requirements
 
-[xlrd](https://pypi.python.org/pypi/xlrd) is the only module not part of the standard library required to run the app.
+[xlrd](https://pypi.python.org/pypi/xlrd) is the only module not part of the standard library required to run the application.
 
 ## Usage
 
